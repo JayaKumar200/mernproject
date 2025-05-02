@@ -609,7 +609,33 @@ const Cart = () => {
   };
 
   const productEmail = localStorage.getItem('email');
-  const handleRemove = async(id)=>{
+//   const handleRemove = async(id)=>{
+//   try {
+//     const res = await axios.delete(`http://192.168.43.252:3000/delete/${id}`, {
+//       data: { productEmail }
+//     });
+
+//     if (res.status === 200) {
+//       // Remove item from Redux
+//       dispatch(removeFromCart(id));
+//       toast.info("Item removed from cart!");
+//       const deletedItemName = res.data.name;
+//       const userData = JSON.parse(localStorage.getItem('userProduct')) || []
+//       const updatedData = userData.filter(item => item.name !== deletedItemName);
+//       localStorage.setItem('userProduct', JSON.stringify(updatedData));
+//       localStorage.setItem('productLength', updatedData.length.toString());
+
+//     } else {
+//       toast.error("Failed to remove item from backend.");
+//     }
+
+//   } catch (err) {
+//     console.error(`Error is: ${err.message}`);
+//     toast.error(`Error: ${err.message}`);
+//   }
+// };
+
+const handleRemove = async (id) => {
   try {
     const res = await axios.delete(`http://192.168.43.252:3000/delete/${id}`, {
       data: { productEmail }
@@ -619,8 +645,23 @@ const Cart = () => {
       // Remove item from Redux
       dispatch(removeFromCart(id));
       toast.info("Item removed from cart!");
-      const userData = JSON.parse(localStorage.getItem('userProduct')) || [];
+
       const deletedItemName = res.data.name;
+
+      // Safe parse userProduct from localStorage
+      let userData = [];
+      try {
+        const data = localStorage.getItem('userProduct');
+        userData = JSON.parse(data);
+        if (!Array.isArray(userData)) {
+          console.error("Expected an array for userProduct but got:", userData);
+          userData = [];
+        }
+      } catch (e) {
+        console.error("Error parsing userProduct:", e.message);
+        userData = [];
+      }
+
       const updatedData = userData.filter(item => item.name !== deletedItemName);
       localStorage.setItem('userProduct', JSON.stringify(updatedData));
       localStorage.setItem('productLength', updatedData.length.toString());
@@ -628,6 +669,7 @@ const Cart = () => {
     } else {
       toast.error("Failed to remove item from backend.");
     }
+
   } catch (err) {
     console.error(`Error is: ${err.message}`);
     toast.error(`Error: ${err.message}`);

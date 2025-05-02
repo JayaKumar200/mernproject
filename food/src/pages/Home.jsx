@@ -61,31 +61,64 @@ const Home = ({}) => {
     scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
   }, []);
 
-  const handleCart = async(item) => {
+ //  const handleCart = async(item) => {
       
-      try{
-        const product = await axios.post('http://192.168.43.252:3000/product',{item,productEmail})
-        if(product.status === 200){
-          navigate("/cart", { state: { selectedItem: item } });
-          dispatch(setIncrease())
-          dispatch(addToCart(item))
-          alert('Product is move to cart')
-          console.log(product.data.products)
-              localStorage.setItem('userProduct', JSON.stringify(product.data.products));
-            localStorage.setItem('productLength', product.data.products.length);
-        }else{
-          console.log('product api is error')
-        }
-      }catch(err){
-        console.log(`error is ${err.message}`)
+ //      try{
+ //        const product = await axios.post('http://192.168.43.252:3000/product',{item,productEmail})
+ //        if(product.status === 200){
+ //          // navigate("/cart", { state: { selectedItem: item } });
+ //          navigate("/cart");
+ //          dispatch(setIncrease())
+ //          dispatch(addToCart(item))
+ //          alert('Product is move to cart')
+ //          console.log(product.data.products)
+ //          const pro =  localStorage.setItem('userProduct',product.data.products);
+ //          console.log(pro)
+ //          localStorage.setItem('productLength', product.data.products.length);
+ //        }else{
+ //          console.log('product api is error')
+ //        }
+ //      }catch(err){
+ //        console.log(`error is ${err.message}`)
 
-        alert(`Error is ${err.message}`)
-      }
+ //        alert(`Error is ${err.message}`)
+ //      }
           
 
-  };
+ // };
 
+const handleCart = async (item) => {
+  try {
+    const product = await axios.post('http://192.168.43.252:3000/product', {
+      item,
+      productEmail,
+    });
 
+    if (product.status === 200) {
+      navigate("/cart");
+      dispatch(setIncrease());
+      dispatch(addToCart(item));
+      alert("Product is moved to cart");
+
+      // Store products array safely
+      const products = product.data.products;
+      if (Array.isArray(products)) {
+         localStorage.setItem("userProduct", JSON.stringify(product.data.products));
+          localStorage.setItem('productLength', products.length.toString());
+        console.log("Saved products to localStorage", products);
+      } else {
+        console.warn("Products data is not an array:", products);
+      }
+
+    } else {
+      console.log("Product API returned an error status.");
+    }
+
+  } catch (err) {
+    console.log(`Error is ${err.message}`);
+    alert(`Error is ${err.message}`);
+  }
+};
 
 
   return (

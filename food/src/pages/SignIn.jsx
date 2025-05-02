@@ -161,11 +161,10 @@ const handleSignin = async () => {
 
    const signin = await axios.post("http://192.168.43.252:3000/signup", user);
 
-    if (signin.status === 201) {
+    if (signin.status === 200) {
       alert("Sign-in successful!");
       console.log(signin.data.token)
       console.log(signin.data)
-      localStorage.setItem('token', signin.data.token); 
       navigate("/login");
     } else {
       console.log('Unexpected response status:', signin.status);

@@ -158,23 +158,22 @@ const Login = () => {
         return;
       }
    
-      // Dispatch login data to redux
       dispatch(setLogin(loginData));
-
-      // Send login request without Authorization header
       const login = await axios.post('http://192.168.43.252:3000/login',loginData
-        ,{
-        headers: {
-        Authorization: `Bearer ${token}`, 
-      },
-    });
+    //     ,{
+    //     headers: {
+    //     Authorization: `Bearer ${token}`, 
+    //   },
+    // });
+        )
 
       if (login.status === 200){
         alert("Login successful!");
         console.log(login.data)
-        localStorage.setItem('userName',login.data.user.userName)
+        localStorage.setItem('userName',login.data.user.username)
         localStorage.setItem('email',login.data.user.email)
-        nameDispatch(setName(login.data.user.userName))
+        localStorage.setItem('token', login.data.user.token); 
+        nameDispatch(setName(login.data.user.username))
          navigate("/")
       }
        else {
