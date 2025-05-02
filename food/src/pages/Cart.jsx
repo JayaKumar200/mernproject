@@ -48,7 +48,7 @@ const Cart = () => {
 
 const handleRemove = async (id) => {
   try {
-    const res = await axios.delete(`https://food-order-backend-t4p3.onrender.com/delete/${id}`, {
+    const res = await axios.delete(`https://mernproject-1-m8dp.onrender.com/delete/${id}`, {
       data: { productEmail }
     });
 
