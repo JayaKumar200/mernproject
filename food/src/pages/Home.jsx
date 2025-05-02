@@ -65,7 +65,7 @@ const Home = ({}) => {
 
 const handleCart = async (item) => {
   try {
-    const product = await axios.post('https://mernproject-1-m8dp.onrender.com/product', {
+    const product = await axios.post('https://mern-pro-mg8d.onrender.com/product', {
       item,
       productEmail,
     });
