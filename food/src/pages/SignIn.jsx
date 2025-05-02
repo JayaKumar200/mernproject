@@ -41,7 +41,7 @@ const handleSignin = async () => {
 
     dispatch(setData(user));
 
-   const signin = await axios.post("https://mernproject-1-m8dp.onrender.com/signup", user);
+   const signin = await axios.post("https://mern-pro-mg8d.onrender.com/signup", user);
 
     if (signin.status === 200) {
       alert("Sign-in successful!");
