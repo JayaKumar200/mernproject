@@ -41,7 +41,7 @@ const handleSignin = async () => {
 
     dispatch(setData(user));
 
-   const signin = await axios.post("https://food-order-backend-t4p3.onrender.com/signup", user);
+   const signin = await axios.post("https://mernproject-1-m8dp.onrender.com/signup", user);
 
     if (signin.status === 200) {
       alert("Sign-in successful!");
