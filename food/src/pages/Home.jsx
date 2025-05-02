@@ -61,35 +61,11 @@ const Home = ({}) => {
     scrollRef.current.scrollBy({ left: 300, behavior: "smooth" });
   }, []);
 
- //  const handleCart = async(item) => {
-      
- //      try{
- //        const product = await axios.post('http://192.168.43.252:3000/product',{item,productEmail})
- //        if(product.status === 200){
- //          // navigate("/cart", { state: { selectedItem: item } });
- //          navigate("/cart");
- //          dispatch(setIncrease())
- //          dispatch(addToCart(item))
- //          alert('Product is move to cart')
- //          console.log(product.data.products)
- //          const pro =  localStorage.setItem('userProduct',product.data.products);
- //          console.log(pro)
- //          localStorage.setItem('productLength', product.data.products.length);
- //        }else{
- //          console.log('product api is error')
- //        }
- //      }catch(err){
- //        console.log(`error is ${err.message}`)
 
- //        alert(`Error is ${err.message}`)
- //      }
-          
-
- // };
 
 const handleCart = async (item) => {
   try {
-    const product = await axios.post('http://192.168.43.252:3000/product', {
+    const product = await axios.post('https://food-order-backend-t4p3.onrender.com/product', {
       item,
       productEmail,
     });
