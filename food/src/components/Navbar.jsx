@@ -18,9 +18,9 @@ const Navbar = ({ cartItems = [], search, setSearch }) => {
   // console.log(nameSelector)
 
   
-const uName  = localStorage.getItem('userName') 
+ const uName  = localStorage.getItem('userName') 
 
-  const slice = uName.slice(0,1).toUpperCase();
+//const slice = uName.slice(0,1).toUpperCase();
 
 useEffect(()=> {
   if(uName){
@@ -78,9 +78,8 @@ useEffect(()=> {
       <nav className="hidden md:flex items-center space-x-6 text-white font-medium text-sm md:text-lg">
         <Link to="/" className="hover:text-yellow-400 transition">Home</Link>
         <Link to="/offers" className="hover:text-yellow-400 transition">Offers</Link>
-        <Link to="/signin" className="hover:text-yellow-400 transition">Sign In</Link>
-        <p className="text-yellow-400 font-semibold text-sm md:text-base ml-2">{slice}</p>
-        <Link to="/search" className="hover:text-yellow-400 transition">Search</Link>
+         <Link to="/signin" className="hover:text-yellow-400 transition">Sign In</Link> 
+        <Link to="/search" className="hover:text-yellow-400 transition">Search</Link> 
         <Link to="/cart" className="relative hover:text-yellow-400 transition flex items-center">
           <FiShoppingCart className="mr-1" /> Cart {selector}
         </Link>
